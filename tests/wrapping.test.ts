@@ -32,7 +32,7 @@ describe('wrapping', (): void => {
   it('Should be a function', (): void => {
     expect(typeof wrapping).toBe('function');
   });
-  it('Should throw an error if no recive an arrar for params', (): void => {
+  it('Should throw an error if no recive an array for params', (): void => {
     expect(() => wrapping({})).toThrow(/array/);
     expect(() => wrapping(true)).toThrow(/array/);
     expect(() => wrapping('Manuela')).toThrow(/array/);
