@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-
+import { countHours } from '../functions/countHours'
 /*
 A millionaire bought a social network, and he doesn't bring good news.
  He has announced that each time an employee misses a working day due to a holiday,
@@ -29,20 +29,41 @@ The year may be a leap year. Make the checks you need for it, if necessary.
 Although the holiday is December 31, the extra hours will be done the same year.
 Date.getDay() method returns the day of the week of a date. 0 is Sunday, 1 is Monday, etc.
 */
-function countHours (year: string, holidays: Array<string>) {
-    if(typeof year !== 'string') throw new Error('Year should be an string')
-}
 
-describe('countHours', () => {
-    it('Should be a function', () => {
+
+describe('countHours', (): void => {
+    // TEST DEPRECATED
+    /* it('Should be a function', () => {
         expect(typeof countHours).toBe('function')
-    })
-    it('Should throw an error if doesnt recive a string for first param', () => {
-        expect(() => countHours(2022)).toThrow(/string/)
-        expect(() => countHours({})).toThrow(/string/)
-        expect(() => countHours([])).toThrow(/string/)
-        expect(() => countHours(true)).toThrow(/string/)
+    }) */
+    it('Should throw an error if doesnt recive a string for first param', (): void => {
+        expect(() => countHours(2022, [])).toThrow(/string/)
+        expect(() => countHours({}, [])).toThrow(/string/)
+        expect(() => countHours([], [])).toThrow(/string/)
+        expect(() => countHours(true, [])).toThrow(/string/)
         expect(() => countHours()).toThrow(/string/)
     })
-    it('Should throw an error if doesnt recive an array for second param')
+    it('Should throw an error if doesnt recive an array for second param', (): void => {
+        expect(() => countHours('2022', {name: 'Mario'})).toThrow(/array/)
+        expect(() => countHours('2022', 22)).toThrow(/array/)
+        expect(() => countHours('2022', false)).toThrow(/array/)
+        expect(() => countHours('2022', null)).toThrow(/array/)
+    })
+    it('Should throw an error if the array of second params are not a string', (): void => {
+        expect(() => countHours('2022', ['22', 'asd', 98])).toThrow(/should contain a string/)
+        expect(() => countHours('2022', ['namida', 'asd', {name: 'Mario'}])).toThrow(/should contain a string/)
+        expect(() => countHours('2022', ['namida', 'asd', true])).toThrow(/should contain a string/)
+        expect(() => countHours('2022', ['namida', 'asd', false])).toThrow(/should contain a string/)
+    })
+    it('Should return a number', (): void => {
+        expect(typeof (countHours('2022', ['06/06']))).toBe('number')
+    })
+    // TEST DEPRECATED
+    /* it('Should return a number that is the total of days should be reovered', () => {
+        expect(countHours('2022', ['01/06','04/01','12/25'])).toBe(2)
+    }) */
+    it('Should return the extra hours in the year', () => {
+        expect(countHours('2022', ['01/06','04/01','12/25'])).toBe(4)
+    })
+    
 })
