@@ -22,6 +22,5 @@
       throw new Error('The param should be an array');
     if (gifts.some(e => typeof e !== 'string'))
       throw new Error('The content of array should be an string');
-      let wrap = "*"
-      return gifts.map(g => `${wrap.repeat(g.length+2)}\n*${g}*\n${wrap.repeat(g.length+2)}`)
+      return gifts.map(g => `${"*".repeat(g.length+2)}\n*${g}*\n${"*".repeat(g.length+2)}`)
   }
